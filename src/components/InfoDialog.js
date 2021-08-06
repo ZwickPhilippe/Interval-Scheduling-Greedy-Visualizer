@@ -27,19 +27,19 @@ function InfoDialog(props) {
           are four ways to sort the jobs:
           <List>
             <ListItem>
-              <CancelIcon />
+              <CancelIcon style={{ color: "red" }} />
               <ListItemText primary={"Starttime"} />
             </ListItem>
             <ListItem>
-              <CancelIcon />
+              <CancelIcon style={{ color: "red" }} />
               <ListItemText primary={"Smallest interval"} />
             </ListItem>
             <ListItem>
-              <CheckIcon />
+              <CheckIcon style={{ color: "green" }} />
               <ListItemText primary={"Endtime"} />
             </ListItem>
             <ListItem>
-              <CancelIcon />
+              <CancelIcon style={{ color: "red" }} />
               <ListItemText primary={"Least conflicts"} />
             </ListItem>
           </List>

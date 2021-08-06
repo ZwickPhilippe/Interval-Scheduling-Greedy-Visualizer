@@ -1,14 +1,12 @@
-import logo from "./logo.svg";
+import { ThemeProvider } from "@material-ui/core";
+import { amber } from "@material-ui/core/colors";
+import { createTheme } from "@material-ui/core/styles";
+import { useRef, useState } from "react";
 import "./App.css";
 import Interval from "./components/Interval";
-import { useState, useRef, createRef } from "react";
-import TextField from "@material-ui/core/TextField";
-import { Typography } from "@material-ui/core";
-import { Button } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core";
-import { createTheme } from "@material-ui/core/styles";
-import { blue, amber, yellow } from "@material-ui/core/colors";
 import NavBar from "./components/Navbar";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const theme = createTheme({
   palette: {
@@ -44,8 +42,15 @@ function App() {
     { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
   ]);
 
+  const [open, setOpen] = useState(true);
+  const [solutionLength, setSolutionLength] = useState(0);
+
   const myRefs = useRef([]); //passes refs to each interval
   const timer = (ms) => new Promise((res) => setTimeout(res, ms)); //timer for loop
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const sortJobs = () => {
     //sorts the jobs based on endTime
@@ -67,8 +72,10 @@ function App() {
         executeScroll(intervals[i].id);
         time = intervals[i].endTime;
       }
-      await timer(100);
+      await timer(20);
     }
+    setSolutionLength(solution.length);
+    setOpen(true);
   };
 
   const generateRandomArray = (size) => {
@@ -103,69 +110,22 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {/* <div
-          style={{
-            width: "100%",
-            position: "fixed",
-            top: "0",
-            backgroundColor: "#2196f3",
-            marginBottom: "2%",
-            zIndex: 3,
-          }}
-        >
-          <div
-            style={{
-              margin: "0.2%",
-              color: "white",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "left",
-            }}
-          >
-            {/* <Typography variant="h3">Interval Scheduling Visualizer</Typography> */}
-        {/* <TextField
-              label="Enter starttime here"
-              variant="filled"
-              style={{ margin: "0 2%" }}
-              color="secondary"
-            />
-            <TextField
-              id="filled-basic"
-              label="Enter endtime here"
-              variant="filled"
-              className={theme.root}
-            />
-            <Button onClick={sortJobs} color="primary" variant="contained">
-              Sort me
-            </Button>
-            <Button
-              onClick={performGreedy}
-              color="secondary"
-              variant="contained"
-            >
-              Sort me
-            </Button>
-            <Button
-              onClick={() => {
-                generateRandomArray(1000);
-              }}
-              color="secondary"
-              variant="contained"
-            >
-              Generate!
-            </Button>
-          </div>
-        </div> */}
         <NavBar
           generateArray={(intervalSize) => generateRandomArray(intervalSize)}
           sortIntervals={() => sortJobs()}
           performGreedy={() => performGreedy()}
         />
-        {/* <div
-        style={{ width: "50%", backgroundColor: "white", marginBottom: "0.1%" }}
-      >
-        Intervall 1
-      </div> */}
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "center", horizontal: "center" }}
+        >
+          <MuiAlert onClose={handleClose} severity="success">
+            It was possible to finish {solutionLength} jobs!
+          </MuiAlert>
+        </Snackbar>
+
         <div style={{ marginTop: "6%" }}>
           {intervals.map((interval, index) => {
             return (

@@ -7,17 +7,18 @@ import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
-import { yellow } from "@material-ui/core/colors";
+import { blue, amber, yellow } from "@material-ui/core/colors";
+import NavBar from "./components/Navbar";
 
 const theme = createTheme({
   palette: {
     primary: {
       main: "#f54287",
     },
-    secondary: yellow,
+    secondary: amber,
   },
   multilineColor: {
-    color: "yellow",
+    color: "#000000",
   },
   root: {
     "& .MuiFilledInput-root": {
@@ -90,7 +91,7 @@ function App() {
 
   const changeColor = (index) => {
     //changes color of interval
-    intervals[index].color = "blue";
+    intervals[index].color = "#2196f3";
     setIntervals([...intervals]);
   };
 
@@ -105,7 +106,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <div
+        {/* <div
           style={{
             width: "100%",
             position: "fixed",
@@ -125,7 +126,7 @@ function App() {
             }}
           >
             {/* <Typography variant="h3">Interval Scheduling Visualizer</Typography> */}
-            <TextField
+        {/* <TextField
               label="Enter starttime here"
               variant="filled"
               style={{ margin: "0 2%" }}
@@ -157,7 +158,12 @@ function App() {
               Generate!
             </Button>
           </div>
-        </div>
+        </div> */}
+        <NavBar
+          generateArray={(intervalSize) => generateRandomArray(intervalSize)}
+          sortIntervals={() => sortJobs()}
+          performGreedy={() => performGreedy()}
+        />
         {/* <div
         style={{ width: "50%", backgroundColor: "white", marginBottom: "0.1%" }}
       >
@@ -177,6 +183,27 @@ function App() {
               </div>
             );
           })}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            width: "100%",
+            position: "fixed",
+            bottom: 0,
+            color: "white",
+          }}
+        >
+          <p>10</p>
+          <p>20</p>
+          <p>30</p>
+          <p>40</p>
+          <p>50</p>
+          <p>60</p>
+          <p>70</p>
+          <p>80</p>
+          <p>90</p>
+          <p>100</p>
         </div>
       </div>
     </ThemeProvider>

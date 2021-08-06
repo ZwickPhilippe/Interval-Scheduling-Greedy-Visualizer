@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "../App.css";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import InfoIcon from "@material-ui/icons/Info";
+import InfoDialog from "./InfoDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 function NavBar(props) {
   const classes = useStyles();
   const [jobSize, setIntervalSize] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <div
@@ -108,8 +111,17 @@ function NavBar(props) {
           >
             Start Greedy
           </Button>
+          <IconButton onClick={() => setDialogOpen(true)}>
+            <InfoIcon style={{ color: "white" }} />
+          </IconButton>
         </div>
       </div>
+      <InfoDialog
+        open={dialogOpen}
+        handleClose={() => {
+          setDialogOpen(false);
+        }}
+      />
     </div>
   );
 }

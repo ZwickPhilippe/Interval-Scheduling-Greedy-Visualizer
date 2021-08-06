@@ -97,11 +97,8 @@ function App() {
 
   const executeScroll = (index) => {
     //executes the scroll to the now colored interval
-    console.log(index);
     myRefs.current[index].scrollIntoView({ block: "end", behavior: "smooth" });
   };
-
-  //TODO: ADD Refs and slow scrolling to the now colored div. Add other option for scheduling to show that they are inefficient
 
   return (
     <ThemeProvider theme={theme}>

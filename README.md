@@ -9,3 +9,6 @@ The jobs could be sorted according to their starttime, endtime, length and numbe
 It is possible to generate a desired amount of jobs/interval using the textfield and the generate button. Then a sorting method can be selected and the jobs can be sorted. With the "Start Greedy" Button, the greedy algorithm starts picking the jobs and will return the amount of compatible jobs that he could find (depending on sorting method, this is the maximum of compatible jobs). After the greedy algorithm is finished, it is possible to sort by a different method, to see the impact of the different sorting methods on the final solution (= number of jobs)
 
 ![IntervalSchedulerLong](https://user-images.githubusercontent.com/74874980/128607052-f6cc080d-cdd8-4416-b895-026075ccb7d4.gif)
+
+### Application infos
+The small app was written in ReactJS. For the Textfields/Buttons/Snackbar/Dialog @material-ui/core and for the icons @material-ui/icons was used.

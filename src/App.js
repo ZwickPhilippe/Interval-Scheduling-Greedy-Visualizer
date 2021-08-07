@@ -42,8 +42,9 @@ function App() {
     { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
   ]);
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [solutionLength, setSolutionLength] = useState(0);
+  const [sortMethod, setSortMethod] = useState(0);
 
   const myRefs = useRef([]); //passes refs to each interval
   const timer = (ms) => new Promise((res) => setTimeout(res, ms)); //timer for loop
@@ -55,9 +56,38 @@ function App() {
   const sortJobs = () => {
     //sorts the jobs based on endTime
     let newArray = intervals;
-    newArray.sort((job1, job2) =>
-      job1.endTime > job2.endTime ? 1 : job1.endTime < job2.endTime ? -1 : 0
-    );
+    switch (sortMethod) {
+      case 0:
+        newArray.sort((job1, job2) =>
+          job1.endTime > job2.endTime ? 1 : job1.endTime < job2.endTime ? -1 : 0
+        );
+        break;
+      case 1:
+        newArray.sort((job1, job2) =>
+          job1.startTime > job2.startTime
+            ? 1
+            : job1.startTime < job2.startTime
+            ? -1
+            : 0
+        );
+        break;
+      case 2:
+        newArray.sort((job1, job2) =>
+          job1.endTime - job1.startTime > job2.endTime - job2.startTime
+            ? 1
+            : job1.endTime - job1.startTime < job2.endTime - job2.startTime
+            ? -1
+            : 0
+        );
+        break;
+      default:
+        console.log("Something went wrong");
+        break;
+    }
+    for (let i = 0; i < newArray.length; i++) {
+      newArray[i].color = "white";
+    }
+
     setIntervals([...newArray]);
   };
 
@@ -107,19 +137,26 @@ function App() {
     myRefs.current[index].scrollIntoView({ block: "end", behavior: "smooth" });
   };
 
+  const changeSortMethod = (e) => {
+    setSortMethod(e.target.value);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div>
         <NavBar
+          key={1000}
           generateArray={(intervalSize) => generateRandomArray(intervalSize)}
           sortIntervals={() => sortJobs()}
           performGreedy={() => performGreedy()}
+          sortMethod={sortMethod}
+          changeDropdown={(e) => changeSortMethod(e)}
         />
         <Snackbar
           open={open}
           autoHideDuration={6000}
           onClose={handleClose}
-          anchorOrigin={{ vertical: "center", horizontal: "center" }}
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
         >
           <MuiAlert onClose={handleClose} severity="success">
             It was possible to finish {solutionLength} jobs!
@@ -129,9 +166,8 @@ function App() {
         <div style={{ marginTop: "6%" }}>
           {intervals.map((interval, index) => {
             return (
-              <div ref={(id) => (myRefs.current[interval.id] = id)}>
+              <div ref={(id) => (myRefs.current[interval.id] = id)} key={index}>
                 <Interval
-                  key={index}
                   startTime={interval.startTime}
                   endTime={interval.endTime}
                   name={interval.name}

@@ -26,21 +26,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const [intervals, setIntervals] = useState([
-    // { startTime: 20, endTime: 30, name: "Job 1", color: "white", id: 0 },
-    // { startTime: 40, endTime: 60, name: "Job 2", color: "white", id: 0 },
-    // { startTime: 0, endTime: 30, name: "Job 3", color: "white", id: 0 },
-    // { startTime: 10, endTime: 30, name: "Job 4", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-    // { startTime: 40, endTime: 60, name: "Job 2", color: "white", id: 0 },
-    // { startTime: 0, endTime: 30, name: "Job 3", color: "white", id: 0 },
-    // { startTime: 10, endTime: 30, name: "Job 4", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-    // { startTime: 60, endTime: 90, name: "Job 5", color: "white", id: 0 },
-  ]);
+  const [intervals, setIntervals] = useState([]);
 
   const [open, setOpen] = useState(false);
   const [solutionLength, setSolutionLength] = useState(0);

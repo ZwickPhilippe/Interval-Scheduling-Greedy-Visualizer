@@ -87,9 +87,11 @@ function NavBar(props) {
           color="secondary"
           variant="contained"
           className={classes.button}
+          disabled={props.running}
         >
           Generate!
         </Button>
+
         <div
           style={{
             display: "flex",
@@ -126,6 +128,7 @@ function NavBar(props) {
             variant="contained"
             className={classes.button}
             onClick={() => props.sortIntervals()}
+            disabled={props.running}
           >
             Sort Intervals
           </Button>
@@ -135,6 +138,7 @@ function NavBar(props) {
             variant="contained"
             className={classes.button}
             onClick={() => props.performGreedy()}
+            disabled={props.running}
           >
             Start Greedy
           </Button>

@@ -27,6 +27,7 @@ const theme = createTheme({
 
 function App() {
   const [intervals, setIntervals] = useState([]);
+  const [running, setRunning] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [solutionLength, setSolutionLength] = useState(0);
@@ -78,6 +79,7 @@ function App() {
   };
 
   const performGreedy = async () => {
+    setRunning(true);
     //performs the greedy algorithm
     let solution = [];
     let time = 0;
@@ -88,10 +90,11 @@ function App() {
         executeScroll(intervals[i].id);
         time = intervals[i].endTime;
       }
-      await timer(20);
+      await timer(10);
     }
     setSolutionLength(solution.length);
     setOpen(true);
+    setRunning(false);
   };
 
   const generateRandomArray = (size) => {
@@ -137,6 +140,7 @@ function App() {
           performGreedy={() => performGreedy()}
           sortMethod={sortMethod}
           changeDropdown={(e) => changeSortMethod(e)}
+          running={running}
         />
         <Snackbar
           open={open}

@@ -72,7 +72,7 @@ function NavBar(props) {
         </Button> */}
         <TextField
           id="filled-basic"
-          label="Intervalsize"
+          label="Number of intervals"
           color="secondary"
           style={{ margin: "0 1%" }}
           InputProps={{
@@ -102,7 +102,10 @@ function NavBar(props) {
           }}
         >
           <FormControl style={{ minWidth: 160 }}>
-            <InputLabel id="demo-controlled-open-select-label">
+            <InputLabel
+              id="demo-controlled-open-select-label"
+              onChange={() => props.sortIntervals()}
+            >
               Sorting method
             </InputLabel>
             <Select
@@ -117,10 +120,11 @@ function NavBar(props) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={0}>EndTime (correct)</MenuItem>
-              <MenuItem value={1}>Starttime (incorrect)</MenuItem>
-              <MenuItem value={2}>Smallest Job (incorrect)</MenuItem>
-              {/* <MenuItem value={3}>Least conflicts (incorrect)</MenuItem> */}
+              {/*TODO: align order with the order in the slides*/}
+              <MenuItem value={0}>Earliest endtime (correct)</MenuItem>
+              <MenuItem value={1}>Earliest starttime (incorrect)</MenuItem>
+              <MenuItem value={2}>Smallest interval (incorrect)</MenuItem>
+              {/* <MenuItem value={3}>Least conflicts (incorrect)</MenuItem> TODO: implement */}
             </Select>
           </FormControl>
           <Button

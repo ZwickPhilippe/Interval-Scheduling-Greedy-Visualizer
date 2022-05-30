@@ -100,17 +100,15 @@ function App() {
   const generateRandomArray = (size) => {
     let generatedArray = [];
     for (let i = 0; i < size; i++) {
-      let startTime = Math.random() * 100;
-      let length = Math.random() * 50;
-      if (startTime + length <= 100) {
-        generatedArray.push({
-          startTime: startTime,
-          endTime: startTime + length,
-          name: "Job " + i,
-          color: "white",
-          id: i,
-        });
-      }
+      let startTime = Math.random() * 90;
+      let length = Math.random() * 40 + 10;
+      generatedArray.push({
+        startTime: startTime,
+        endTime: Math.min(startTime + length, 100),
+        name: "Interval " + i,
+        color: "white",
+        id: i,
+      });
     }
     setIntervals(generatedArray);
   };

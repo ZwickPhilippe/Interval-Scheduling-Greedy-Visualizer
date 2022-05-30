@@ -25,10 +25,11 @@ function InfoDialog(props) {
           algorithm can start adding jobs, it is necessary to sort the jobs. The
           way the intervals are sorted is extremely important. In general there
           are four ways to sort the jobs:
+          {/*TODO: align order with the order in the slides*/}
           <List>
             <ListItem>
               <CancelIcon style={{ color: "red" }} />
-              <ListItemText primary={"Starttime"} />
+              <ListItemText primary={"Earliest starttime"} />
             </ListItem>
             <ListItem>
               <CancelIcon style={{ color: "red" }} />
@@ -36,7 +37,7 @@ function InfoDialog(props) {
             </ListItem>
             <ListItem>
               <CheckIcon style={{ color: "green" }} />
-              <ListItemText primary={"Endtime"} />
+              <ListItemText primary={"Earliest endtime"} />
             </ListItem>
             <ListItem>
               <CancelIcon style={{ color: "red" }} />
